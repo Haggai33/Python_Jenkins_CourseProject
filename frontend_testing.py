@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
-get_user = int(input("enter user id to search"))
+get_user = 1
 
 driver = webdriver.Chrome(service=Service("C:\\chromedriver_win32\\chromedriver.exe"))
 
