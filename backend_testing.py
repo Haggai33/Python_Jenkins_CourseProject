@@ -41,7 +41,7 @@ user_id = 1
 user_name = 'haggai'
 
 api_url = "http://127.0.0.1:5000/data/"+str(user_id)
-url = f"http://127.0.0.1:5000/data/" + user_id
+url = f"http://127.0.0.1:5000/data/" + str(user_id)
 
 # Payload data
 data = {
