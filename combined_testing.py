@@ -1,29 +1,22 @@
-import json
-import pymysql
 import datetime
-
-import requests
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+import requests
+from db_connector import DBConnector
 
 # Constants
-schema_name = "freedb_users_10"
-db_host = 'sql.freedb.tech'
-db_port = 3306
-db_user = 'freedb_haggai'
-db_pass = '7p8Gc!Ycp!MB?%A'
-db_name = 'freedb_users_10'
-conn = pymysql.connect(host=db_host, port=db_port, user=db_user, passwd=db_pass, db=db_name)
+host = 'sql.freedb.tech'
+port = 3306
+user = 'freedb_haggai'
+password = '7p8Gc!Ycp!MB?%A'
+database = 'freedb_users_10'
+db = DBConnector(host, port, user, password, database)
 
 
-user_id = int(input("enter user id"))
-user_name = input("enter user name")
+user_id = 1
+user_name = 'haggai'
 url = f"http://127.0.0.1:5000/data/{user_id}"
 
 # payload data
@@ -50,12 +43,11 @@ try:
     else:
         raise get_res
 except:
-
     print("Except_testing ERROR")
 
 # search element that contains the user_name.
 
-driver = webdriver.Chrome(service=Service("C:\\chromedriver_win32\\chromedriver.exe"))
+driver = webdriver.Chrome(service=Service("C:\\chromedriver.exe"))
 try:
     driver.get(f"http://127.0.0.1:5001/users/get_user_name/{user_id}")
     user_name_element = driver.find_element(by=By.ID, value="user_name")
@@ -63,9 +55,11 @@ try:
     if user_name_element.text == user_name:
         print("Great news! We have found the ELEMENT", user_name_element.text)
     else:
-        raise user_name_element.text
-except:
-    print("except_element NOT found")
+        raise ValueError("User name does not match")
 
-pass
-print("code end")
+except NoSuchElementException:
+    print("Element not found")
+except Exception as e:
+    print("An error occurred:", str(e))
+finally:
+    driver.quit()
