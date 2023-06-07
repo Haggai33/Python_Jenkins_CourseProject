@@ -4,7 +4,7 @@ from db_connector import DBConnector
 import rest_app
 
 
-# Constants
+# Constants _
 
 host = 'sql.freedb.tech'
 port = 3306
