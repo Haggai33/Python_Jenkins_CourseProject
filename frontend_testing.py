@@ -1,16 +1,10 @@
-import time
-from selenium import webdriver
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
 get_user = 1
 
-driver = webdriver.Chrome(service=Service("C:\\chromedriver_win32\\chromedriver.exe"))
+driver = webdriver.Chrome(service=Service("C://chromedriver.exe"))
 
 driver.get(f"http://127.0.0.1:5001/users/get_user_name/{get_user}")
 
