@@ -4,7 +4,7 @@ from db_connector import DBConnector
 import rest_app
 
 
-# Constants _
+# Constants _--
 
 host = 'sql.freedb.tech'
 port = 3306
@@ -19,22 +19,26 @@ db = DBConnector(host, port, user, password, database)
 
 error_codes = [500, 400]
 # input id and user
-while True:
-    try:
-        user_id = input("Enter user id: ")
-        if user_id.isdigit():
-            break
-        else:
-            print("Please enter a valid numeric value.")
-    except ValueError:
-        print("Please enter a number.")
 
-while True:
-    user_name = input("Enter user name: ")
-    if any(char.isalpha() for char in user_name):
-        break
-    else:
-        print("Please enter a valid string value.")
+# while True:
+#     try:
+#         user_id = input("Enter user id: ")
+#         if user_id.isdigit():
+#             break
+#         else:
+#             print("Please enter a valid numeric value.")
+#     except ValueError:
+#         print("Please enter a number.")
+#
+# while True:
+#     user_name = input("Enter user name: ")
+#     if any(char.isalpha() for char in user_name):
+#         break
+#     else:
+#         print("Please enter a valid string value.")
+
+user_id = 1
+user_name = 'haggai'
 
 api_url = "http://127.0.0.1:5000/data/"+str(user_id)
 url = f"http://127.0.0.1:5000/data/" + user_id
