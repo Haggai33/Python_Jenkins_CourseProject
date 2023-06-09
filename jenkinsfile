@@ -1,0 +1,91 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '20'))
+    }
+
+    stages {
+        stage('Pull Code') {
+            steps {
+                git credentialsId: 'git_userpass', url: 'https://github.com/Haggai33/Python_Jenkins_CourseProject.git', branch: 'master'
+            }
+        }
+        
+        stage('Run rest_app') {
+            steps {
+                script {
+                    try {
+                        bat 'start /min python rest_app.py'
+                    } catch (Exception e) {
+                        
+                    }
+                }
+            }
+        }
+        
+        stage('Run web_app') {
+            steps {
+                script {
+                    try {
+                        bat 'start /min python web_app.py'
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }
+        
+        stage('Run backend_testing') {
+            steps {
+                script {
+                    try {
+                        bat 'start /min python backend_testing.py'
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }
+        
+        stage('Run frontend_testing') {
+            steps {
+                script {
+                    try {
+                        bat 'python frontend_testing.py'
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }
+        
+        stage('Run combined_testing') {
+            steps {
+                script {
+                    try {
+                        bat 'python combined_testing.py'
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }
+        
+        stage('Run clean_environment') {
+            steps {
+                script {
+                    try {
+                        bat 'python clean_environment.py'
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    triggers {
+        pollSCM('H/30 * * * *')
+    }
+}
