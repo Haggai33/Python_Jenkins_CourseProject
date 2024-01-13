@@ -1,0 +1,60 @@
+DevOps Course Project - Flask REST API with Jenkins CI/CD
+Overview
+This project is a Flask-based REST API server that performs CRUD (Create, Read, Update, Delete) operations on a MySQL database. It includes a Jenkins pipeline for continuous integration and deployment, ensuring automated testing and stable builds.
+
+Components
+REST API Server: Handles HTTP requests for CRUD operations.
+Web Application: Displays user information from the database.
+Automated Testing: Scripts using Selenium and Python requests for testing.
+Jenkins CI/CD Pipeline: Automates the build, test, and deployment processes.
+Getting Started
+Prerequisites
+Python 3.x
+Flask
+pymysql
+Selenium WebDriver
+MySQL Database
+Jenkins
+Installation
+Clone the repository:
+bash
+Copy code
+git clone [repository URL]
+Install the required Python packages:
+Copy code
+pip install flask pymysql selenium requests
+Configuration
+Update the database configuration in the Python scripts:
+
+Host: sql.freedb.tech
+Port: 3306
+User: freedb_haggai
+Password: [Your Password]
+Database: freedb_users_10
+Running the Application
+Start the REST API Server
+Copy code
+python rest_api_server.py
+Start the Web Application
+Copy code
+python web_app.py
+Automated Testing
+Copy code
+python automated_tests.py
+API Endpoints
+GET /data/<user_id>: Retrieve a user's name by ID.
+POST /data/<user_id>: Add a new user.
+PUT /data/<user_id>: Update a user's name.
+DELETE /data/<user_id>: Delete a user.
+Jenkins Pipeline Integration
+Pipeline Configuration
+The Jenkinsfile includes stages for pulling code, running applications, executing tests, and cleaning the environment.
+
+Pipeline Options
+Build Discarder: Keeps the last 5 builds for 20 days.
+Poll SCM: Checks for code changes every 30 minutes.
+Trigger
+Automatically triggered by source code changes.
+
+Stopping the Servers
+Send a GET request to /stop_server on the respective server.
